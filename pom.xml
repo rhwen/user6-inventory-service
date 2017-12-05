@@ -27,6 +27,37 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+  	<dependency>
+  		<groupId>org.wildfly.swarm</groupId>
+  		<artifactId>jpa</artifactId>
+  	</dependency>
+   	<dependency>
+  		<groupId>org.wildfly.swarm</groupId>
+  		<artifactId>cdi</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.wildfly.swarm</groupId>
+  		<artifactId>arquillian</artifactId>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.wildfly.swarm</groupId>
+  		<artifactId>undertow</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.wildfly.swarm</groupId>
+  		<artifactId>jaxrs-jsonp</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.jboss.resteasy</groupId>
+  		<artifactId>resteasy-client</artifactId>
+  		<version>3.0.19.Final</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.wildfly.swarm</groupId>
+  		<artifactId>monitor</artifactId>
+  	</dependency>
   </dependencies>
   <build>
     <plugins>
@@ -58,8 +89,28 @@
     </plugins>
   </build>
   <profiles>
+  	<profile>
+  		<id>local</id>
+  		<activation>
+  			<activeByDefault>true</activeByDefault>
+  		</activation>
+  		<dependencies>
+  			<dependency>
+  				<groupId>com.h2database</groupId>
+  				<artifactId>h2</artifactId>
+  				<version>${version.h2}</version>
+  			</dependency>
+  		</dependencies>
+  	</profile>
     <profile>
       <id>openshift</id>
+      <dependencies>
+      	  <dependency>
+	  		<groupId>org.postgresql</groupId>
+	  		<artifactId>postgresql</artifactId>
+	  		<version>${version.postgresql}</version>
+	  	</dependency>
+      </dependencies>
       <build>
         <plugins>
           <plugin>
